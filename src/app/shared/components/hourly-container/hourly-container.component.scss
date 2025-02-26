@@ -8,6 +8,7 @@
   height: 950px;
   min-width: 200px;
   // background-color: #0a122a;
+
   color: $text-black;
   overflow-y: scroll;
   background: rgba(255, 255, 255, 0.23);
@@ -20,6 +21,7 @@
     align-items: center;
     text-align: center;
     border-bottom: 3px solid gainsboro;
+    color: white;
   }
 }
 
