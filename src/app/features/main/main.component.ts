@@ -17,6 +17,7 @@ import { conditions } from '../../shared/consts/dynamic.backrounds';
 import { DynamicBgService } from '../../shared/services/dynamic-bg.service';
 import { FormatTimePipe } from '../../shared/pipes/format-time.pipe';
 import { HourlyContainerComponent } from '../../shared/components/hourly-container/hourly-container.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-main',
@@ -28,6 +29,7 @@ import { HourlyContainerComponent } from '../../shared/components/hourly-contain
     RoundTempPipe,
     FormatTimePipe,
     HourlyContainerComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
@@ -50,6 +52,8 @@ export default class MainComponent {
 
   conditions: { [key: string]: string } = conditions;
 
+  locationSearch = new FormControl('', { nonNullable: true });
+
   ngOnInit(): void {
     this.initWeather();
     this.getSearch();
@@ -60,6 +64,7 @@ export default class MainComponent {
     const memory = localStorage.getItem('searchMemory');
 
     if (memory) {
+      console.log(memory);
       this.loadWeather(memory);
     } else if (!memory) {
       this.loadCurr();
@@ -95,20 +100,22 @@ export default class MainComponent {
   }
 
   loadCurr() {
-    this.currService.getCurr().subscribe((res) => {
-      if (res) {
+    this.currService.getCurr().subscribe({
+      next: (res) => {
         this.loadWeather(res.city);
         this.loadingScreen = false;
-      } else {
-        this.userLocationSearch = true;
+      },
+      error: () => {
+        this.alerts.toast('Cennot get your location', 'error', '');
         this.searchBar = true;
+        this.userLocationSearch = true;
         this.loadingScreen = false;
-      }
+      },
     });
   }
 
   loadWeather(location: string) {
-    if (location === '') {
+    if (!location) {
       this.searchLocation = false;
       this.searchBar = true;
       this.loadingScreen = false;
@@ -145,5 +152,11 @@ export default class MainComponent {
     return this.dynamicBg.getVideoPath(
       this.displayWeather()?.currentConditions.icon
     );
+  }
+
+  submitUserSearch(event: Event) {
+    event.preventDefault();
+    const value = this.locationSearch.value;
+    this.loadWeather(value);
   }
 }

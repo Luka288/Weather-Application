@@ -13,26 +13,20 @@
       *ngIf="loadingScreen"
     ></ngx-cube-loader>
     <div class="inputs" *ngIf="userLocationSearch">
-      <input
-        class="form-control me-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        #searchInput
-        (search)="loadWeather(searchInput.value)"
-      />
-      <button
-        class="btn btn-outline-primary"
-        #value
-        type="search"
-        (click)="loadWeather(searchInput.value)"
-      >
-        Search
-      </button>
+      <form (submit)="submitUserSearch($event)">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          [formControl]="locationSearch"
+        />
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+      <p *ngIf="userLocationSearch">
+        could not find geo location please enter your location
+      </p>
     </div>
-    <p *ngIf="userLocationSearch">
-      could not find geo location please enter your location
-    </p>
   </div>
   <div class="wrapper" *ngIf="searchLocation">
     <app-hourly-container [hourlyForecasts]="hourly()" />

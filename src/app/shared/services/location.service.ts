@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { currKey, currLocation } from '../consts/consts';
 import { currLocationInter } from '../interfaces/currInterface';
-import { catchError, Observable, Subject, tap } from 'rxjs';
+import { catchError, Observable, Subject, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class LocationService {
 
       catchError((err) => {
         this.isLoading$.next(false);
-        throw err;
+        return throwError(() => err);
       })
     );
   }
