@@ -12,7 +12,7 @@
       colorSet="cyan"
       *ngIf="loadingScreen"
     ></ngx-cube-loader>
-    <div class="inputs" *ngIf="checkCurr">
+    <div class="inputs" *ngIf="userLocationSearch">
       <input
         class="form-control me-2"
         type="search"
@@ -30,25 +30,27 @@
         Search
       </button>
     </div>
-    <p *ngIf="checkCurr">
+    <p *ngIf="userLocationSearch">
       could not find geo location please enter your location
     </p>
   </div>
   <div class="wrapper" *ngIf="searchLocation">
+    <!-- ! შეიძლება ცალკე კომპონენტში გატანა HOURLY  -->
     <div class="hourly">
-      <div class="hourlyWeather" *ngFor="let item of hourly">
+      <div class="hourlyWeather" *ngFor="let item of hourly()">
         <p>
           {{ item.datetimeEpoch | dateFormat }}
         </p>
         <p>
-          {{ timeFormat(item.datetime) }}
+          {{ item.datetime | formatTime }}
         </p>
         <p>{{ item.temp | roundTemp }} °C</p>
         <p>{{ item.conditions }}</p>
       </div>
     </div>
+    <!-- ! შეიძლება ცალკე კომპონენტში გატანა HOURLY  -->
 
-    <div class="secondBox">
+    <div class="secondBox" *ngIf="displayWeather() as displayWeather">
       <div class="upperContainer">
         <div class="mainInfo">
           <h1 class="city">
@@ -101,12 +103,12 @@
               ></button>
             </div>
             <div class="offcanvas-body">
-              <div class="hourlyWeather" *ngFor="let item of hourly">
+              <div class="hourlyWeather" *ngFor="let item of hourly()">
                 <p>
                   {{ item.datetimeEpoch | dateFormat }}
                 </p>
                 <p>
-                  {{ timeFormat(item.datetime) }}
+                  {{ item.datetime | formatTime }}
                 </p>
                 <p>{{ item.temp | roundTemp }} °C</p>
                 <p>{{ item.conditions }}</p>
