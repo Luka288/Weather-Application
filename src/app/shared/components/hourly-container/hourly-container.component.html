@@ -1,0 +1,12 @@
+<div class="hourly">
+  <div class="hourlyWeather" *ngFor="let foreCast of foreCast">
+    <p>
+      {{ foreCast.datetimeEpoch | dateFormat }}
+    </p>
+    <p>
+      {{ foreCast.datetime | formatTime }}
+    </p>
+    <p>{{ foreCast.temp | roundTemp }} °C</p>
+    <p>{{ foreCast.conditions }}</p>
+  </div>
+</div>

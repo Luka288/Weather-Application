@@ -4,3 +4,8 @@
   align-items: $align;
   flex-direction: $direction;
 }
+
+@mixin space-between($justify: space-between) {
+  display: flex;
+  justify-content: $justify;
+}

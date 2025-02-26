@@ -1,0 +1,38 @@
+@import "../../../shared/styles/mixins/mixins";
+@import "../../../shared/styles/variables/variables";
+
+.hourly {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 950px;
+  min-width: 200px;
+  // background-color: #0a122a;
+  color: $text-black;
+  overflow-y: scroll;
+  background: rgba(255, 255, 255, 0.23);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  .hourlyWeather {
+    align-items: center;
+    text-align: center;
+    border-bottom: 3px solid gainsboro;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(206, 206, 206);
+  border-radius: 10prgb (160, 160, 160);
+}

@@ -65,34 +65,36 @@ main {
   .wrapper {
     width: 100%;
     min-height: 100%;
-    @include flex(space-between, center, row);
+    display: flex;
+    justify-content: space-between;
 
-    .hourly {
-      width: 200px;
-      min-width: 200px;
-      height: 100vh;
-      min-height: 950px;
-      // background-color: #0a122a;
-      color: $text-black;
-      overflow-y: scroll;
-      background: rgba(255, 255, 255, 0.23);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+    // .hourly {
+    //   width: 200px;
+    //   min-width: 200px;
+    //   height: 100vh;
+    //   min-height: 950px;
+    //   // background-color: #0a122a;
+    //   color: $text-black;
+    //   overflow-y: scroll;
+    //   background: rgba(255, 255, 255, 0.23);
+    //   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    //   backdrop-filter: blur(20px);
+    //   -webkit-backdrop-filter: blur(20px);
+    //   border: 1px solid rgba(255, 255, 255, 0.3);
 
-      .hourlyWeather {
-        text-align: center;
-        border-bottom: 3px solid gainsboro;
-      }
-    }
+    //   .hourlyWeather {
+    //     text-align: center;
+    //     border-bottom: 3px solid gainsboro;
+    //   }
+    // }
 
     .secondBox {
       width: 87%;
+      margin-top: 35px;
 
       .mainInfo {
         width: 100%;
-        height: 400px;
+        height: 350px;
         @include flex();
         color: $white-text;
 

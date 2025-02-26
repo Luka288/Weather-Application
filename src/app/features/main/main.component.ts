@@ -16,6 +16,7 @@ import { LocationService } from '../../shared/services/location.service';
 import { conditions } from '../../shared/consts/dynamic.backrounds';
 import { DynamicBgService } from '../../shared/services/dynamic-bg.service';
 import { FormatTimePipe } from '../../shared/pipes/format-time.pipe';
+import { HourlyContainerComponent } from '../../shared/components/hourly-container/hourly-container.component';
 
 @Component({
   selector: 'app-main',
@@ -26,6 +27,7 @@ import { FormatTimePipe } from '../../shared/pipes/format-time.pipe';
     NgxCubeLoaderComponent,
     RoundTempPipe,
     FormatTimePipe,
+    HourlyContainerComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',

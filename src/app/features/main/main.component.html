@@ -35,20 +35,7 @@
     </p>
   </div>
   <div class="wrapper" *ngIf="searchLocation">
-    <!-- ! შეიძლება ცალკე კომპონენტში გატანა HOURLY  -->
-    <div class="hourly">
-      <div class="hourlyWeather" *ngFor="let item of hourly()">
-        <p>
-          {{ item.datetimeEpoch | dateFormat }}
-        </p>
-        <p>
-          {{ item.datetime | formatTime }}
-        </p>
-        <p>{{ item.temp | roundTemp }} °C</p>
-        <p>{{ item.conditions }}</p>
-      </div>
-    </div>
-    <!-- ! შეიძლება ცალკე კომპონენტში გატანა HOURLY  -->
+    <app-hourly-container [hourlyForecasts]="hourly()" />
 
     <div class="secondBox" *ngIf="displayWeather() as displayWeather">
       <div class="upperContainer">
