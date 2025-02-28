@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { tap } from 'rxjs';
 import { WeatherAPIService } from '../../shared/services/weather-api.service';
 import {
+  daysInterf,
   hourlyRate,
   WeatherResponse,
 } from '../../shared/interfaces/weatherInterface';

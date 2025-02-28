@@ -27,13 +27,9 @@ export class NavigationComponent {
 
   ngOnInit(): void {
     this.refreshClock();
-    this.headerService.headerVisible$
-      .pipe(
-        tap((res) => {
-          this.isHeaderVisible = res;
-        })
-      )
-      .subscribe();
+    this.headerService.headerVisible$.subscribe(
+      (res) => (this.isHeaderVisible = res)
+    );
   }
 
   refreshClock() {
