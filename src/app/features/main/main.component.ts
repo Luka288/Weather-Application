@@ -2,7 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { tap } from 'rxjs';
 import { WeatherAPIService } from '../../shared/services/weather-api.service';
 import {
-  daysInterf,
   hourlyRate,
   WeatherResponse,
 } from '../../shared/interfaces/weatherInterface';
@@ -65,7 +64,6 @@ export default class MainComponent {
     const memory = localStorage.getItem('searchMemory');
 
     if (memory) {
-      console.log(memory);
       this.loadWeather(memory);
     } else if (!memory) {
       this.loadCurr();
@@ -90,14 +88,6 @@ export default class MainComponent {
         })
       )
       .subscribe();
-
-    this.currService.isLoading$
-      .pipe(
-        tap((isLoading) => {
-          this.loadingScreen = isLoading;
-        })
-      )
-      .subscribe();
   }
 
   loadCurr() {
@@ -107,7 +97,6 @@ export default class MainComponent {
         this.loadingScreen = false;
       },
       error: () => {
-        this.alerts.toast('Cennot get your location', 'error', '');
         this.searchBar = true;
         this.userLocationSearch = true;
         this.loadingScreen = false;
@@ -123,15 +112,11 @@ export default class MainComponent {
       this.headerBoolean.isHeaderAvailable(false);
       return;
     }
-    // return throwError(() => error);
     this.weatherAPI.getWeather(location).subscribe({
       next: (res) => {
         this.hourly.set(res.days[0].hours);
         this.displayWeather.set(res);
         this.headerBoolean.isHeaderAvailable(true);
-      },
-      error: () => {
-        this.alerts.toast('City/Country Not Found', 'error', '');
       },
     });
   }

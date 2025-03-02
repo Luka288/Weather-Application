@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { currKey, currLocation } from '../consts/consts';
+import { Inject, inject, Injectable } from '@angular/core';
+import { currLocation } from '../consts/consts';
 import { currLocationInter } from '../interfaces/currInterface';
-import { catchError, Observable, Subject, tap, throwError } from 'rxjs';
+import { Subject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,14 +12,11 @@ export class LocationService {
 
   isLoading$ = new Subject<boolean>();
 
-  getCurr() {
-    return this.http.get<currLocationInter>(`${currLocation}${currKey}`).pipe(
-      tap(() => this.isLoading$.next(false)),
+  constructor(@Inject(currLocation) private LOCATION_ENDPOINT: string) {}
 
-      catchError((err) => {
-        this.isLoading$.next(false);
-        return throwError(() => err);
-      })
-    );
+  getCurr() {
+    return this.http
+      .get<currLocationInter>(`${this.LOCATION_ENDPOINT}`)
+      .pipe(tap(() => this.isLoading$.next(false)));
   }
 }
