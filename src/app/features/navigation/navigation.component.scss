@@ -1,22 +1,93 @@
 nav {
-  .container-fluid {
-    padding-left: 15%;
-  }
+  padding: 15px;
+  background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
 
-  .github {
-    padding-right: 15%;
-    i {
-      font-size: 30px;
-    }
-    a {
-      align-items: center;
-      gap: 15px;
-      color: white;
-      text-decoration: none;
-    }
-  }
+  .nav-wrap {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 
-  .liveClock {
-    color: white;
+    form {
+      display: flex;
+
+      input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 25px;
+        color: white;
+        transition: 0.3s all;
+
+        &:focus {
+          border-color: #0d6efd;
+          box-shadow: 0 0 15px rgba(13, 110, 253, 0.3);
+          outline: none;
+          transition: 0.3s all;
+        }
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.6);
+        }
+      }
+
+      .search-btn {
+        border-radius: 20px;
+        padding: 6px 15px;
+        color: white;
+        background-color: #3895ff;
+        border: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: #0d6efd;
+          box-shadow: 0 0 15px rgba(13, 110, 253, 0.4);
+        }
+      }
+    }
+
+    .nav-left {
+      i {
+        font-size: 24px;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #ffffff;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+
+    .liveClock {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+      font-family: "Orbitron", sans-serif;
+      padding: 14px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      }
+
+      p {
+        padding: 0;
+        margin: 0;
+      }
+    }
   }
 }

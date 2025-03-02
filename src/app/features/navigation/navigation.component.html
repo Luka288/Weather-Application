@@ -1,14 +1,16 @@
-<nav class="navbar bg-dark" *ngIf="isHeaderVisible">
-  <div class="container-fluid">
-    <form class="d-flex" role="search" (submit)="search($event)">
+<!-- !bg-dark -->
+
+<nav class="navbar" *ngIf="isHeaderVisible">
+  <div class="nav-wrap">
+    <form role="search" (submit)="search($event)">
       <input
         class="form-control me-2"
         type="search"
-        placeholder="Search"
+        placeholder="Search for location"
         aria-label="Search"
         [formControl]="searchControl"
       />
-      <button class="btn btn-outline-primary" type="search">Search</button>
+      <button class="search-btn" type="search">Search</button>
     </form>
     <div class="liveClock">
       <p *ngIf="clockLoading">Loading Local Clock...</p>
@@ -16,12 +18,8 @@
         {{ displayClock }}
       </p>
     </div>
-    <div class="github">
-      <a
-        href="https://github.com/Luka288"
-        target="_blank"
-        class="d-flex correct"
-      >
+    <div class="nav-left">
+      <a href="https://github.com/Luka288" target="_blank" class="correct">
         <span>
           <i class="fa-brands fa-github" style="color: #ffffff"></i>
         </span>
