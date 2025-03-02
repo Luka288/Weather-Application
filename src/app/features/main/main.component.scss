@@ -74,15 +74,15 @@ main {
     width: 100%;
     min-height: 100%;
     display: flex;
-    justify-content: space-between;
 
     .secondBox {
       width: 87%;
       margin-top: 35px;
+      @include flex(flex-start, center, column);
 
       .mainInfo {
         width: 100%;
-        height: 350px;
+        height: 320px;
         @include flex();
         color: $white-text;
 
@@ -92,6 +92,7 @@ main {
           text-transform: capitalize;
           font-weight: 370;
           color: $white-text;
+          text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 
           .cityAdress {
             font-size: 43px;
@@ -134,50 +135,33 @@ main {
 
       .foreCasts {
         width: 95%;
-        padding-top: 40px;
-        border-radius: 90px;
-        @include flex();
-        background: rgba(202, 202, 202, 0.17);
+        // padding-top: 40px;
         border-radius: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(202, 202, 202, 0.15);
+        @include flex();
 
         .container {
           width: 80%;
-          height: 220px;
-          @include flex(left, baseline, row);
-          gap: 30px;
+          height: fit-content;
+          @include flex(left, baseline, column);
+          gap: 25px;
           overflow-y: hidden;
           overflow-x: scroll;
+          background: linear-gradient(
+            135deg,
+            rgba(20, 20, 40, 0.85),
+            rgba(10, 10, 30, 0.75)
+          );
+          border-radius: 20px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 15px;
+          transition: all 0.3s ease;
 
-          .Card {
-            @include flex(center, flex-start, column);
-            flex-wrap: wrap;
-            width: 350px;
-            color: $white-text;
-
-            .cityIcon {
-              text-transform: capitalize;
-              @include flex(center, center, row);
-              font-size: 25px;
-
-              img {
-                width: 40px;
-                height: 40px;
-              }
-            }
-
-            .desc {
-              font-weight: 240;
-              font-size: 12px;
-              width: 100px;
-            }
-
-            .date {
-              font-size: 16px;
-            }
+          .cards {
+            display: flex;
+            gap: 15px;
           }
         }
 
@@ -186,7 +170,12 @@ main {
 
           .titleText {
             color: $white-text;
-            padding-bottom: 30px;
+            padding: 0;
+            margin: 0;
+            font-size: 32px;
+            font-weight: 400;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+            font-family: "Orbitron", sans-serif;
             font-size: 30px;
             font-weight: 300;
           }

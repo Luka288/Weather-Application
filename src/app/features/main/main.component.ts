@@ -18,6 +18,7 @@ import { DynamicBgService } from '../../shared/services/dynamic-bg.service';
 import { FormatTimePipe } from '../../shared/pipes/format-time.pipe';
 import { HourlyContainerComponent } from '../../shared/components/hourly-container/hourly-container.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ForecastCardComponent } from '../../shared/components/forecast-card/forecast-card.component';
 
 @Component({
   selector: 'app-main',
@@ -30,6 +31,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     FormatTimePipe,
     HourlyContainerComponent,
     ReactiveFormsModule,
+    ForecastCardComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
@@ -37,7 +39,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 export default class MainComponent {
   private readonly weatherAPI = inject(WeatherAPIService);
   private readonly searchWeather = inject(SearchWeatherService);
-  private readonly alerts = inject(sweetAlertsService);
   private readonly headerBoolean = inject(HeaderServiceService);
   private readonly currService = inject(LocationService);
   private readonly dynamicBg = inject(DynamicBgService);

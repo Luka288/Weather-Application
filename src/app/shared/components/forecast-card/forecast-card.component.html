@@ -1,0 +1,13 @@
+<div class="Card">
+  <p class="date">
+    {{ forecast.datetime }}
+  </p>
+  <p class="cityIcon">
+    {{ locationCode.address }}
+  </p>
+  <img [src]="getWeatherIcon(forecast.icon)" alt="" />
+  <p>{{ forecast.temp }} °C</p>
+  <p class="desc">
+    {{ forecast.description }}
+  </p>
+</div>

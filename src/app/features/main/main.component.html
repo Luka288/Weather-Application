@@ -105,22 +105,16 @@
         <p>Wind Direction: {{ displayWeather?.currentConditions?.winddir }}°</p>
       </div>
       <div class="foreCasts" *ngIf="displayWeather && searchLocation">
-        <div class="title">
-          <p class="titleText">15 day fore cast</p>
-        </div>
         <div class="container">
-          <div class="Card" *ngFor="let weather of displayWeather?.days">
-            <p class="date">
-              {{ weather.datetime }}
-            </p>
-            <p class="cityIcon">
-              {{ displayWeather.address }}
-              <span> <img [src]="getWeatherIcon(weather.icon)" alt="" /></span>
-            </p>
-            <p>{{ weather.temp }} °C</p>
-            <p class="desc">
-              {{ weather.description }}
-            </p>
+          <div class="title">
+            <p class="titleText">15 Day Forecast</p>
+          </div>
+          <div class="cards">
+            <app-forecast-card
+              *ngFor="let item of displayWeather.days"
+              [forecastCard]="item"
+              [location]="displayWeather"
+            />
           </div>
         </div>
       </div>
