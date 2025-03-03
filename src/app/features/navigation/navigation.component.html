@@ -2,13 +2,13 @@
   <div class="nav-wrap">
     <form role="search" (submit)="search($event)">
       <input
-        class="form-control me-2"
-        type="search"
+        type="text"
         placeholder="Search for location"
         aria-label="Search"
         [formControl]="searchControl"
       />
-      <button class="search-btn" type="search">Search</button>
+
+      <i class="fa-solid fa-magnifying-glass" (click)="search($event)"></i>
     </form>
     <div class="liveClock">
       <p *ngIf="clockLoading">Loading Local Clock...</p>

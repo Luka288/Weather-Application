@@ -64,38 +64,6 @@
           >
             Show Hourly Forecast
           </button>
-
-          <div
-            class="offcanvas offcanvas-start bg-dark"
-            data-bs-backdrop="static"
-            tabindex="-1"
-            id="staticBackdrop"
-            aria-labelledby="staticBackdropLabel"
-          >
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="staticBackdropLabel">
-                Hourly Forecast
-              </h5>
-              <button
-                type="button"
-                class="btn-close bg-light"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="offcanvas-body">
-              <div class="hourlyWeather" *ngFor="let item of hourly()">
-                <p>
-                  {{ item.datetimeEpoch | dateFormat }}
-                </p>
-                <p>
-                  {{ item.datetime | formatTime }}
-                </p>
-                <p>{{ item.temp | roundTemp }} °C</p>
-                <p>{{ item.conditions }}</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="windSpeedEtc">

@@ -11,11 +11,14 @@ nav {
 
     form {
       display: flex;
+      align-items: center;
+      position: relative;
 
       input {
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 25px;
+        padding: 8px 45px 8px 15px;
         color: white;
         transition: 0.3s all;
 
@@ -29,6 +32,15 @@ nav {
         &::placeholder {
           color: rgba(255, 255, 255, 0.6);
         }
+      }
+
+      i {
+        position: absolute;
+        right: 20px;
+        color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
       }
 
       .search-btn {

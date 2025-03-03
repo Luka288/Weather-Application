@@ -140,7 +140,8 @@ main {
         @include flex();
 
         .container {
-          width: 80%;
+          width: 100%;
+          max-width: 900px;
           height: fit-content;
           @include flex(left, baseline, column);
           gap: 25px;
@@ -205,9 +206,9 @@ main {
         margin: auto;
         @include flex();
 
-        .container {
-          width: 600px !important;
-        }
+        // .container {
+        //   width: 600px !important;
+        // }
       }
     }
   }
@@ -216,15 +217,19 @@ main {
 @media (max-width: 768px) {
   main {
     .wrapper {
+      .secondBox {
+        width: 100%;
+      }
+
       .foreCasts {
         width: 200px;
         height: 450px;
         padding-top: 40px;
         @include flex();
 
-        .container {
-          width: 400px !important;
-        }
+        // .container {
+        //   width: 400px !important;
+        // }
       }
     }
   }
@@ -254,9 +259,9 @@ main {
         padding-top: 40px;
         @include flex();
 
-        .container {
-          width: 200px !important;
-        }
+        // .container {
+        //   width: 200px !important;
+        // }
       }
 
       .secondBox {

@@ -4,9 +4,9 @@
 .hourly {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 100%;
+  min-width: 100px;
   height: 950px;
-  min-width: 200px;
   color: $text-black;
   overflow-y: scroll;
   overflow-y: auto;
@@ -89,4 +89,10 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(45deg, #3895ff, #5eaaff);
+}
+
+@media (max-width: 768px) {
+  .hourly {
+    display: none;
+  }
 }
