@@ -255,14 +255,9 @@ main {
       }
 
       .foreCasts {
-        width: 200px !important;
+        // width: 200px !important;
         height: 450px;
-        // padding-top: 40px;
         @include flex();
-
-        // .container {
-        //   width: 200px !important;
-        // }
       }
 
       .secondBox {
