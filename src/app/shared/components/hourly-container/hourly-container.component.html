@@ -1,4 +1,4 @@
-<div class="hourly">
+<div class="hourly" [ngClass]="{ active: isOpen() }">
   <div class="hourlyWeather" *ngFor="let foreCast of foreCast">
     <p class="date">{{ foreCast.datetimeEpoch | dateFormat }}</p>
     <p class="timeP">{{ foreCast.datetime | formatTime }}</p>

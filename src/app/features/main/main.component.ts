@@ -16,6 +16,7 @@ import { DynamicBgService } from '../../shared/services/dynamic-bg.service';
 import { HourlyContainerComponent } from '../../shared/components/hourly-container/hourly-container.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ForecastCardComponent } from '../../shared/components/forecast-card/forecast-card.component';
+import { BooleanService } from '../../shared/services/boolean.service';
 
 @Component({
   selector: 'app-main',
@@ -37,6 +38,7 @@ export default class MainComponent {
   private readonly headerBoolean = inject(HeaderServiceService);
   private readonly currService = inject(LocationService);
   private readonly dynamicBg = inject(DynamicBgService);
+  private readonly booleanService = inject(BooleanService);
 
   displayWeather = signal<WeatherResponse | null>(null);
   hourly = signal<hourlyRate[]>([]);
@@ -140,5 +142,9 @@ export default class MainComponent {
     event.preventDefault();
     const value = this.locationSearch.value;
     this.loadWeather(value);
+  }
+
+  toggleContainer() {
+    this.booleanService.toggle();
   }
 }

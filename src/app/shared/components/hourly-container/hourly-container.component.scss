@@ -4,7 +4,7 @@
 .hourly {
   width: 100%;
   min-width: 100px;
-  height: 950px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   color: $text-black;
@@ -50,7 +50,7 @@
 
     .date {
       font-weight: 600;
-      color: #e0e0e0;
+      color: black;
       letter-spacing: 0.5px;
     }
 
@@ -93,5 +93,15 @@
 @media (max-width: 768px) {
   .hourly {
     display: none;
+    position: absolute;
+    transition: all 0.1s;
+  }
+
+  .hourly.active {
+    width: 100%;
+    height: 300px;
+    top: 0;
+    display: flex;
+    position: absolute;
   }
 }

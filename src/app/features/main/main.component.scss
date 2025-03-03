@@ -19,7 +19,7 @@ main {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 100vh;
+  // min-height: 100vh;
   font-family: $main-font-roboto;
 
   .bgVideo {
@@ -73,14 +73,14 @@ main {
 
   .wrapper {
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-grow: 10;
 
     .secondBox {
       width: 87%;
+      @include flex(flex-start, center, column);
       // margin-top: 35px;
-      // @include flex(flex-start, center, column);
 
       .mainInfo {
         width: 100%;
@@ -137,9 +137,18 @@ main {
 
       .foreCasts {
         width: 95%;
-        // padding-top: 40px;
-        // border-radius: 16px;
-        // @include flex();
+
+        .hourlyCast {
+          display: none;
+          height: 65px;
+          outline: none;
+          border: none;
+          color: white;
+          background-color: #34495e;
+          border: 3px solid #2c3e4c;
+          border-radius: 30px;
+          padding: 10px;
+        }
 
         .container {
           width: 100%;
@@ -165,6 +174,10 @@ main {
             @include flex(flex-start, center, row);
             overflow: auto;
           }
+
+          .openContainer {
+            display: block;
+          }
         }
 
         .title {
@@ -187,7 +200,7 @@ main {
 
     .windSpeedEtc {
       @include flex(center, center, row);
-      gap: 30px;
+      gap: 18px;
       flex-wrap: wrap;
 
       p {
@@ -201,8 +214,8 @@ main {
   main {
     .wrapper {
       .foreCasts {
-        width: 50%;
-        height: 450px;
+        // width: 50%;
+        // height: 450px;
         // padding-top: 40px;
         margin: auto;
         @include flex();
@@ -220,17 +233,12 @@ main {
     .wrapper {
       .secondBox {
         width: 100%;
-      }
 
-      .foreCasts {
-        width: 200px;
-        height: 450px;
-        // padding-top: 40px;
-        @include flex();
-
-        // .container {
-        //   width: 400px !important;
-        // }
+        .foreCasts {
+          .hourlyCast {
+            display: block;
+          }
+        }
       }
     }
   }
@@ -242,48 +250,6 @@ main {
       justify-content: center;
       .upperContainer {
         text-align: center;
-      }
-
-      .hourly {
-        position: fixed;
-        max-height: 200px !important;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1121;
-        height: 200px;
-      }
-
-      .foreCasts {
-        // width: 200px !important;
-        height: 450px;
-        @include flex();
-      }
-
-      .secondBox {
-        .mainInfo {
-          .Disable {
-            display: block;
-          }
-
-          .offcanvas-title {
-            color: $white-text;
-          }
-
-          .offcanvas-body {
-            color: $white-text;
-
-            .hourlyWeather {
-              border-bottom: 1px solid white;
-            }
-          }
-        }
-      }
-    }
-
-    .wrapper {
-      .hourly {
-        display: none;
       }
     }
   }

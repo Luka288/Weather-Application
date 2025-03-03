@@ -56,15 +56,6 @@
           <p class="condition">
             {{ displayWeather?.currentConditions?.conditions }}
           </p>
-          <!-- <button
-            class="btn btn-light Disable"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#staticBackdrop"
-            aria-controls="staticBackdrop"
-          >
-            Show Hourly Forecast
-          </button> -->
         </div>
       </div>
       <div class="windSpeedEtc">
@@ -74,7 +65,10 @@
         <p>Wind Direction: {{ displayWeather?.currentConditions?.winddir }}°</p>
       </div>
       <div class="foreCasts" *ngIf="displayWeather && searchLocation">
-        <div class="container">
+        <button class="hourlyCast" (click)="toggleContainer()">
+          <i class="fas fa-clock"></i> Hourly Forecast
+        </button>
+        <div class="container" [ngClass]="">
           <div class="title">
             <p class="titleText">15 Day Forecast</p>
           </div>
