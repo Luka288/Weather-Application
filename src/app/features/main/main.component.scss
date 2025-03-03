@@ -18,6 +18,7 @@
 main {
   position: relative;
   width: 100%;
+  height: 100%;
   min-height: 100vh;
   font-family: $main-font-roboto;
 
@@ -74,11 +75,12 @@ main {
     width: 100%;
     min-height: 100%;
     display: flex;
+    flex-grow: 10;
 
     .secondBox {
       width: 87%;
-      margin-top: 35px;
-      @include flex(flex-start, center, column);
+      // margin-top: 35px;
+      // @include flex(flex-start, center, column);
 
       .mainInfo {
         width: 100%;
@@ -136,17 +138,15 @@ main {
       .foreCasts {
         width: 95%;
         // padding-top: 40px;
-        border-radius: 16px;
-        @include flex();
+        // border-radius: 16px;
+        // @include flex();
 
         .container {
           width: 100%;
           max-width: 900px;
           height: fit-content;
-          @include flex(left, baseline, column);
+          // margin-bottom: 90px;
           gap: 25px;
-          overflow-y: hidden;
-          overflow-x: scroll;
           background: linear-gradient(
             135deg,
             rgba(20, 20, 40, 0.85),
@@ -154,15 +154,16 @@ main {
           );
           border-radius: 20px;
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.2);
           padding: 15px;
           transition: all 0.3s ease;
 
           .cards {
-            display: flex;
+            width: 100%;
             gap: 15px;
+            @include flex(flex-start, center, row);
+            overflow: auto;
           }
         }
 
@@ -202,7 +203,7 @@ main {
       .foreCasts {
         width: 50%;
         height: 450px;
-        padding-top: 40px;
+        // padding-top: 40px;
         margin: auto;
         @include flex();
 
@@ -224,7 +225,7 @@ main {
       .foreCasts {
         width: 200px;
         height: 450px;
-        padding-top: 40px;
+        // padding-top: 40px;
         @include flex();
 
         // .container {
@@ -256,7 +257,7 @@ main {
       .foreCasts {
         width: 200px !important;
         height: 450px;
-        padding-top: 40px;
+        // padding-top: 40px;
         @include flex();
 
         // .container {

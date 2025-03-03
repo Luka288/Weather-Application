@@ -2,8 +2,9 @@
 @import "../../../shared/styles/variables/variables";
 
 .Card {
-  width: 320px;
-  height: 320px;
+  width: 220px;
+  height: fit-content;
+  max-width: 300px;
   @include flex(center, flex-start, column);
   flex-wrap: wrap;
   color: $white-text;

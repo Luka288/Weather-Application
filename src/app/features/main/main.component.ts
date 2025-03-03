@@ -6,16 +6,13 @@ import {
   WeatherResponse,
 } from '../../shared/interfaces/weatherInterface';
 import { CommonModule } from '@angular/common';
-import { DateFormatPipe } from '../../shared/pipes/date-format.pipe';
 import { SearchWeatherService } from '../../shared/services/search-weather.service';
-import { sweetAlertsService } from '../../shared/services/sweet-alerts.service';
 import { HeaderServiceService } from '../../shared/services/header-service.service';
 import { NgxCubeLoaderComponent } from 'ngx-cube-loader';
 import { RoundTempPipe } from '../../shared/pipes/round-temp.pipe';
 import { LocationService } from '../../shared/services/location.service';
 import { conditions } from '../../shared/consts/dynamic.backrounds';
 import { DynamicBgService } from '../../shared/services/dynamic-bg.service';
-import { FormatTimePipe } from '../../shared/pipes/format-time.pipe';
 import { HourlyContainerComponent } from '../../shared/components/hourly-container/hourly-container.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ForecastCardComponent } from '../../shared/components/forecast-card/forecast-card.component';
@@ -25,10 +22,8 @@ import { ForecastCardComponent } from '../../shared/components/forecast-card/for
   standalone: true,
   imports: [
     CommonModule,
-    DateFormatPipe,
     NgxCubeLoaderComponent,
     RoundTempPipe,
-    FormatTimePipe,
     HourlyContainerComponent,
     ReactiveFormsModule,
     ForecastCardComponent,

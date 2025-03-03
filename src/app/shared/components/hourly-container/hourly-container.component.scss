@@ -2,11 +2,11 @@
 @import "../../../shared/styles/variables/variables";
 
 .hourly {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   min-width: 100px;
   height: 950px;
+  display: flex;
+  flex-direction: column;
   color: $text-black;
   overflow-y: scroll;
   overflow-y: auto;
@@ -19,7 +19,6 @@
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
 
   &:hover {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
