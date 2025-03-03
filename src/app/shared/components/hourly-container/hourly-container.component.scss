@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   color: $text-black;
-  overflow: auto;
+  overflow: scroll;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1),
@@ -100,6 +100,7 @@
   .hourly.active {
     width: 100%;
     height: 300px;
+    min-height: 300px;
     top: 0;
     display: flex;
     position: absolute;
