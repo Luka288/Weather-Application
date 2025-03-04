@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   color: $text-black;
-  overflow: scroll;
+  overflow: auto;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1),

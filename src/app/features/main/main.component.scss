@@ -214,15 +214,8 @@ main {
   main {
     .wrapper {
       .foreCasts {
-        // width: 50%;
-        // height: 450px;
-        // padding-top: 40px;
         margin: auto;
         @include flex();
-
-        // .container {
-        //   width: 600px !important;
-        // }
       }
     }
   }
@@ -233,6 +226,8 @@ main {
     .wrapper {
       .secondBox {
         width: 100%;
+        // padding-top: 0;
+        margin-bottom: 30px;
 
         .foreCasts {
           .hourlyCast {
