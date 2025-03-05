@@ -5,7 +5,6 @@ import { FormatTimePipe } from '../../pipes/format-time.pipe';
 import { CommonModule } from '@angular/common';
 import { hourlyRate } from '../../interfaces/weatherInterface';
 import { BooleanService } from '../../services/boolean.service';
-import { single } from 'rxjs';
 
 @Component({
   selector: 'app-hourly-container',
@@ -30,7 +29,13 @@ export class HourlyContainerComponent {
   toggle() {
     this.bool.isOpen.subscribe((res) => {
       this.isOpen.set(res);
-      console.log(this.isOpen());
     });
+  }
+
+  isCurrentHour(dateTime: number) {
+    const date = new Date(dateTime * 1000);
+    const cardHour = date.getHours();
+    const currTime = new Date().getHours();
+    return cardHour === currTime ? true : false;
   }
 }

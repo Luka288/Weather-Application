@@ -50,7 +50,7 @@
 
     .date {
       font-weight: 600;
-      color: black;
+      color: rgb(223, 217, 217);
       letter-spacing: 0.5px;
     }
 
@@ -72,6 +72,12 @@
       color: rgba(255, 255, 255, 0.8);
       font-style: italic;
     }
+  }
+
+  .currentHour {
+    border: 2px solid #2196f3;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 }
 

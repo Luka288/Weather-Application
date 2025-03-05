@@ -5,7 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class DateFormatPipe implements PipeTransform {
-  //date pipe
   transform(value: number): string {
     const date = new Date(Number(value) * 1000);
     const format = date.toDateString();

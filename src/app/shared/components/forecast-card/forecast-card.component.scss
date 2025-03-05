@@ -3,7 +3,7 @@
 
 .Card {
   width: 220px;
-  height: 250px;
+  height: 300px;
   max-width: 300px;
   @include flex(center, flex-start, column);
   flex-wrap: wrap;
