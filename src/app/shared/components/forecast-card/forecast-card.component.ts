@@ -13,9 +13,7 @@ export class ForecastCardComponent {
   @Input({ alias: 'forecastCard' }) forecast!: daysInterf;
   @Input({ alias: 'location' }) locationCode!: WeatherResponse;
 
-  conditions: { [key: string]: string } = conditions;
-
-  getWeatherIcon(condition: string | undefined): string {
-    return this.conditions[condition || 'Unknown'] || '';
+  getWeatherIcon(condition: string): string {
+    return conditions[condition || 'Unknown'] || '';
   }
 }

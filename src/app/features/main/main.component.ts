@@ -48,8 +48,6 @@ export default class MainComponent {
   userLocationSearch: boolean = false;
   loadingScreen: boolean = true;
 
-  conditions: { [key: string]: string } = conditions;
-
   locationSearch = new FormControl('', { nonNullable: true });
 
   ngOnInit(): void {
@@ -120,7 +118,7 @@ export default class MainComponent {
   }
 
   getWeatherIcon(condition: string | undefined): string {
-    return this.conditions[condition || 'Unknown'] || '';
+    return conditions[condition || 'Unknown'] || '';
   }
 
   getSearch() {

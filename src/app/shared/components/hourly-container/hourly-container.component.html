@@ -3,6 +3,7 @@
     class="hourlyWeather"
     *ngFor="let foreCast of foreCast"
     [ngClass]="{ currentHour: isCurrentHour(foreCast.datetimeEpoch) }"
+    scrollToView
   >
     <span *ngIf="isCurrentHour(foreCast.datetimeEpoch)">
       <i class="fa-solid fa-clock"></i>
