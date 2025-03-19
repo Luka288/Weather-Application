@@ -6,7 +6,6 @@
   height: 300px;
   max-width: 300px;
   @include flex(center, flex-start, column);
-  flex-wrap: wrap;
   color: $white-text;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;

@@ -17,6 +17,8 @@ import { HourlyContainerComponent } from '../../shared/components/hourly-contain
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ForecastCardComponent } from '../../shared/components/forecast-card/forecast-card.component';
 import { BooleanService } from '../../shared/services/boolean.service';
+import { TrackWidthDirective } from '../../shared/directives/track-width.directive';
+import { DateFormatPipe } from '../../shared/pipes/date-format.pipe';
 
 @Component({
   selector: 'app-main',
@@ -49,6 +51,8 @@ export default class MainComponent {
   loadingScreen: boolean = true;
 
   locationSearch = new FormControl('', { nonNullable: true });
+
+  currDate = Date.now();
 
   ngOnInit(): void {
     this.initWeather();
