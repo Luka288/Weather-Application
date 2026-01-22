@@ -45,10 +45,10 @@ export default class MainComponent {
   displayWeather = signal<WeatherResponse | null>(null);
   hourly = signal<hourlyRate[]>([]);
 
-  searchLocation: boolean = false;
-  searchBar: boolean = false;
-  userLocationSearch: boolean = false;
-  loadingScreen: boolean = true;
+  searchLocation = signal<boolean>(false);
+  searchBar = signal<boolean>(false);
+  userLocationSearch = signal<boolean>(false);
+  loadingScreen = signal<boolean>(false);
 
   locationSearch = new FormControl('', { nonNullable: true });
 
@@ -67,8 +67,8 @@ export default class MainComponent {
       this.loadWeather(memory);
     } else if (!memory) {
       this.loadCurr();
-      this.loadingScreen = true;
-      this.searchBar = true;
+      this.loadingScreen.set(true);
+      this.searchBar.set(true);
     }
   }
 
@@ -76,16 +76,16 @@ export default class MainComponent {
     this.weatherAPI.searchBar$
       .pipe(
         tap((res) => {
-          this.searchBar = res;
-        })
+          this.searchBar.set(res);
+        }),
       )
       .subscribe();
 
     this.weatherAPI.searchLocation$
       .pipe(
         tap((res) => {
-          this.searchLocation = res;
-        })
+          this.searchLocation.set(res);
+        }),
       )
       .subscribe();
   }
@@ -94,21 +94,21 @@ export default class MainComponent {
     this.currService.getCurr().subscribe({
       next: (res) => {
         this.loadWeather(res.city);
-        this.loadingScreen = false;
+        this.loadingScreen.set(false);
       },
       error: () => {
-        this.searchBar = true;
-        this.userLocationSearch = true;
-        this.loadingScreen = false;
+        this.searchBar.set(true);
+        this.userLocationSearch.set(true);
+        this.loadingScreen.set(false);
       },
     });
   }
 
   loadWeather(location: string) {
     if (!location) {
-      this.searchLocation = false;
-      this.searchBar = true;
-      this.loadingScreen = false;
+      this.searchLocation.set(false);
+      this.searchBar.set(true);
+      this.loadingScreen.set(false);
       this.headerBoolean.isHeaderAvailable(false);
       return;
     }
@@ -136,7 +136,7 @@ export default class MainComponent {
 
   setBg() {
     return this.dynamicBg.getVideoPath(
-      this.displayWeather()?.currentConditions.icon
+      this.displayWeather()?.currentConditions.icon,
     );
   }
 

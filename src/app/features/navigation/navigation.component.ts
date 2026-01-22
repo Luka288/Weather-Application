@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { tap } from 'rxjs';
 import { HeaderServiceService } from '../../shared/services/header-service.service';
 import { SearchWeatherService } from '../../shared/services/search-weather.service';
@@ -17,18 +17,18 @@ export class NavigationComponent {
   private readonly headerService = inject(HeaderServiceService);
 
   // variables
-  displayClock: string = '';
+  displayClock = signal<string>('');
 
   // Booleans
-  isHeaderVisible: boolean = false;
-  clockLoading: boolean = true;
+  isHeaderVisible = signal<boolean>(false);
+  clockLoading = signal<boolean>(false);
 
   searchControl = new FormControl('', { nonNullable: true });
 
   ngOnInit(): void {
     this.refreshClock();
-    this.headerService.headerVisible$.subscribe(
-      (res) => (this.isHeaderVisible = res)
+    this.headerService.headerVisible$.subscribe((res) =>
+      this.isHeaderVisible.set(res),
     );
   }
 
@@ -40,8 +40,8 @@ export class NavigationComponent {
 
   liveClock() {
     const date = new Date();
-    this.displayClock = date.toLocaleTimeString();
-    this.clockLoading = false;
+    this.displayClock.set(date.toLocaleTimeString());
+    this.clockLoading.set(false);
   }
 
   search(event: Event) {

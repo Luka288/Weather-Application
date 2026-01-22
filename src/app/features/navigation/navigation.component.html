@@ -1,26 +1,30 @@
-<nav class="navbar" *ngIf="isHeaderVisible">
-  <div class="nav-wrap">
-    <form role="search" (submit)="search($event)">
-      <input
-        type="text"
-        placeholder="Search for location"
-        aria-label="Search"
-        [formControl]="searchControl"
-      />
+@if (isHeaderVisible()) {
+  <nav class="navbar">
+    <div class="nav-wrap">
+      <form role="search" (submit)="search($event)">
+        <input
+          type="text"
+          placeholder="Search for location"
+          aria-label="Search"
+          [formControl]="searchControl"
+        />
 
-      <i class="fa-solid fa-magnifying-glass" (click)="search($event)"></i>
-    </form>
-    <div class="liveClock">
-      <p *ngIf="clockLoading">Loading Local Clock...</p>
-      <p>
-        {{ displayClock }}
-      </p>
+        <i class="fa-solid fa-magnifying-glass" (click)="search($event)"></i>
+      </form>
+      <div class="liveClock">
+        @if (clockLoading()) {
+          <p>Loading Local Clock...</p>
+        }
+        <p>
+          {{ displayClock() }}
+        </p>
+      </div>
+      <div class="nav-left">
+        <i class="fa-brands fa-github"></i>
+        <a href="https://github.com/Luka288" target="_blank" class="correct">
+          Luka288
+        </a>
+      </div>
     </div>
-    <div class="nav-left">
-      <i class="fa-brands fa-github"></i>
-      <a href="https://github.com/Luka288" target="_blank" class="correct">
-        Luka288
-      </a>
-    </div>
-  </div>
-</nav>
+  </nav>
+}

@@ -9,6 +9,7 @@ import {
 } from '@angular/common/http';
 import { errorInterceptor } from './shared/interceptors/error.interceptor';
 import { API, currLocation } from './shared/consts/consts';
+import { APIrequestInterceptor } from './shared/interceptors/api.request.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +24,8 @@ export const appConfig: ApplicationConfig = {
       provide: currLocation,
       useValue: `https://ipinfo.io/json?token=9b0d5d3a816ac6`,
     },
-    provideHttpClient(withInterceptors([errorInterceptor])),
+    provideHttpClient(
+      withInterceptors([errorInterceptor, APIrequestInterceptor]),
+    ),
   ],
 };
