@@ -1,4 +1,11 @@
-import { Component, inject, Input, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
 import { RoundTempPipe } from '../../pipes/round-temp.pipe';
 import { FormatTimePipe } from '../../pipes/format-time.pipe';

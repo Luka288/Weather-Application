@@ -1,4 +1,5 @@
 import { Directive, ElementRef } from '@angular/core';
+import { ConnectableObservable } from 'rxjs';
 
 @Directive({
   selector: '[scrollToView]',
@@ -9,10 +10,13 @@ export class ScrollToViewDirective {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.el.nativeElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      });
+      if (this.el.nativeElement.classList.contains('currentHour')) {
+        this.el.nativeElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+        console.log(this.el.nativeElement);
+      }
     }, 500);
   }
 }
