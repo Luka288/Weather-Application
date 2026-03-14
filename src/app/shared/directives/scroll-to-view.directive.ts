@@ -15,7 +15,6 @@ export class ScrollToViewDirective {
           behavior: 'smooth',
           block: 'center',
         });
-        console.log(this.el.nativeElement);
       }
     }, 500);
   }
