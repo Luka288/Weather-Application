@@ -1,0 +1,43 @@
+<div class="secondBox">
+  <div class="upperContainer">
+    <div class="mainInfo">
+      <h1 class="city">
+        <span class="cityAdress">
+          {{ weatherData()?.address }}
+        </span>
+        {{ weatherData()?.resolvedAddress }}
+      </h1>
+      <div class="underHeader">
+        @if (
+          weatherData()?.currentConditions?.conditions &&
+          weatherData()?.currentConditions?.icon
+        ) {
+          <img
+            [src]="getWeatherIcon(weatherData()?.currentConditions?.icon)"
+            alt="Weather-icon"
+          />
+        }
+        <p class="Temp">
+          {{ (weatherData()?.currentConditions)!.temp | roundTemp }}
+          °C
+        </p>
+      </div>
+      <p class="condition">
+        {{ weatherData()?.currentConditions?.conditions }}
+      </p>
+    </div>
+  </div>
+  <div class="windSpeedEtc">
+    <p>
+      Wind speed:
+      {{ weatherData()?.currentConditions?.windspeed }} M/S
+    </p>
+    <p>
+      Wind Direction:
+      {{ weatherData()?.currentConditions?.winddir }}°
+    </p>
+  </div>
+  @if (weatherData()) {
+    <app-forecast-container [weatherData]="weatherData()" />
+  }
+</div>

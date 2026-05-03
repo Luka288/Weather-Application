@@ -19,6 +19,7 @@ import { ForecastCardComponent } from '../../shared/components/forecast-card/for
 import { BooleanService } from '../../shared/services/boolean.service';
 import { TrackWidthDirective } from '../../shared/directives/track-width.directive';
 import { DateFormatPipe } from '../../shared/pipes/date-format.pipe';
+import { WeatherDataComponent } from '../../shared/components/weather-data/weather-data.component';
 
 @Component({
   selector: 'app-main',
@@ -30,6 +31,7 @@ import { DateFormatPipe } from '../../shared/pipes/date-format.pipe';
     HourlyContainerComponent,
     ReactiveFormsModule,
     ForecastCardComponent,
+    WeatherDataComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
@@ -121,9 +123,9 @@ export default class MainComponent {
     });
   }
 
-  getWeatherIcon(condition: string | undefined): string {
-    return conditions[condition || 'Unknown'] || '';
-  }
+  // getWeatherIcon(condition: string | undefined): string {
+  //   return conditions[condition || 'Unknown'] || '';
+  // }
 
   getSearch() {
     this.searchWeather.searchValue$.subscribe((value) => {
@@ -146,7 +148,7 @@ export default class MainComponent {
     this.loadWeather(value);
   }
 
-  toggleContainer() {
-    this.booleanService.toggle();
-  }
+  // toggleContainer() {
+  //   this.booleanService.toggle();
+  // }
 }

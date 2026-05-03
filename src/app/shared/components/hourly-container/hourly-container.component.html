@@ -1,4 +1,4 @@
-<div class="hourly" [ngClass]="{ active: isOpen() }">
+<div class="hourly" [class.active]="isOpen">
   @for (foreCast of foreCast; track $index) {
     <div
       class="hourlyWeather"

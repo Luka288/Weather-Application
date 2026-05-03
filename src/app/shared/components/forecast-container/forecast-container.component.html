@@ -1,0 +1,15 @@
+<div class="foreCasts">
+  <button class="hourlyCast" (click)="toggleContainer()">
+    <i class="fas fa-clock"></i> Hourly Forecast
+  </button>
+  <div class="container">
+    <div class="title">
+      <p class="titleText">15 Day Forecast</p>
+    </div>
+    <div class="cards">
+      @for (item of weatherData()?.days; track $index) {
+        <app-forecast-card [forecastCard]="item" [location]="weatherData()!" />
+      }
+    </div>
+  </div>
+</div>

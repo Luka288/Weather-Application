@@ -36,72 +36,15 @@
   }
   @if (searchLocation()) {
     <div class="wrapper">
-      <app-hourly-container [hourlyForecasts]="hourly()" />
+      <div class="side-container">
+        <app-hourly-container [hourlyForecasts]="hourly()" />
+      </div>
 
-      @if (displayWeather()) {
-        <div class="secondBox">
-          <div class="upperContainer">
-            <div class="mainInfo">
-              <h1 class="city">
-                <span class="cityAdress">
-                  {{ displayWeather()?.address }}
-                </span>
-                {{ displayWeather()?.resolvedAddress }}
-              </h1>
-              <div class="underHeader">
-                @if (
-                  displayWeather()?.currentConditions?.conditions &&
-                  displayWeather()?.currentConditions?.icon
-                ) {
-                  <img
-                    [src]="
-                      getWeatherIcon(displayWeather()?.currentConditions?.icon)
-                    "
-                    alt="Weather-icon"
-                  />
-                }
-                <p class="Temp">
-                  {{ (displayWeather()?.currentConditions)!.temp | roundTemp }}
-                  °C
-                </p>
-              </div>
-              <p class="condition">
-                {{ displayWeather()?.currentConditions?.conditions }}
-              </p>
-            </div>
-          </div>
-          <div class="windSpeedEtc">
-            <p>
-              Wind speed:
-              {{ displayWeather()?.currentConditions?.windspeed }} M/S
-            </p>
-            <p>
-              Wind Direction:
-              {{ displayWeather()?.currentConditions?.winddir }}°
-            </p>
-          </div>
-          @if (displayWeather() && searchLocation()) {
-            <div class="foreCasts">
-              <button class="hourlyCast" (click)="toggleContainer()">
-                <i class="fas fa-clock"></i> Hourly Forecast
-              </button>
-              <div class="container">
-                <div class="title">
-                  <p class="titleText">15 Day Forecast</p>
-                </div>
-                <div class="cards">
-                  @for (item of displayWeather()?.days; track $index) {
-                    <app-forecast-card
-                      [forecastCard]="item"
-                      [location]="displayWeather()!"
-                    />
-                  }
-                </div>
-              </div>
-            </div>
-          }
-        </div>
-      }
+      <div class="middle-container">
+        @if (displayWeather()) {
+          <app-weather-data [weatherData]="displayWeather()" />
+        }
+      </div>
     </div>
   }
 </main>

@@ -32,18 +32,10 @@ export class HourlyContainerComponent {
 
   @Input({ alias: 'hourlyForecasts' }) foreCast!: hourlyRate[];
 
-  isOpen = signal<boolean>(false);
-
   constructor() {}
 
-  ngOnInit(): void {
-    this.toggle();
-  }
-
-  toggle() {
-    this.bool.isOpen.subscribe((res) => {
-      this.isOpen.set(res);
-    });
+  get isOpen() {
+    return this.bool.isOpen();
   }
 
   isCurrentHour(dateTime: number) {
