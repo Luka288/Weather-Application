@@ -1,0 +1,34 @@
+@import "../../../shared/styles/mixins/mixins";
+@import "../../../shared/styles/variables/variables";
+
+.searchBar {
+  width: 100%;
+  height: 100vh;
+  min-height: 100%;
+  background-color: $main-background-color;
+  @include flex(center, center, column);
+
+  .inputs {
+    width: fit-content;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    form {
+      display: flex;
+    }
+
+    input {
+      width: 350px;
+    }
+  }
+  p {
+    text-transform: capitalize;
+  }
+
+  p {
+    color: $white-text;
+  }
+}
