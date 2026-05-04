@@ -67,27 +67,109 @@ nav {
     }
 
     .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 10px 20px;
-      border-radius: 25px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
+      @include flex(center, center, row);
+      gap: 25px;
 
-      i {
-        font-size: 24px;
-        color: white;
+      .github {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+
+        i {
+          font-size: 24px;
+          color: white;
+        }
+
+        a {
+          text-decoration: none;
+          color: #ffffff;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+          }
+        }
       }
 
-      a {
-        text-decoration: none;
-        color: #ffffff;
+      .lang-switch {
+        position: relative;
+        display: inline-block;
 
-        &:hover {
-          background: rgba(255, 255, 255, 0.1);
-          box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        .lang-btn {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(255, 255, 255, 0.08);
+          border: 0.5px solid rgba(255, 255, 255, 0.18);
+          border-radius: 8px;
+          padding: 6px 12px;
+          cursor: pointer;
+          color: #fff;
+          font-size: 14px;
+          font-weight: 500;
+          min-width: 72px;
+          justify-content: space-between;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.14);
+          }
+
+          .chevron {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.18s;
+
+            &.open {
+              transform: rotate(180deg);
+            }
+          }
+        }
+
+        .lang-dropdown {
+          position: absolute;
+          top: calc(100% + 6px);
+          right: 0;
+          background: #1a2235;
+          border: 0.5px solid rgba(255, 255, 255, 0.15);
+          border-radius: 8px;
+          overflow: hidden;
+          min-width: 130px;
+          z-index: 99;
+        }
+
+        .lang-option {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 9px 14px;
+          cursor: pointer;
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.85);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.08);
+          }
+
+          &.active {
+            color: #fff;
+            font-weight: 500;
+          }
+
+          .check {
+            margin-left: auto;
+            color: #60a5fa;
+            font-size: 13px;
+          }
+        }
+
+        .flag {
+          font-size: 16px;
+          line-height: 1;
         }
       }
     }

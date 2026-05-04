@@ -29,11 +29,11 @@
   </div>
   <div class="windSpeedEtc">
     <p>
-      Wind speed:
+      {{ "wind_speed" | transloco }}
       {{ weatherData()?.currentConditions?.windspeed }} M/S
     </p>
     <p>
-      Wind Direction:
+      {{ "wind_dir" | transloco }}
       {{ weatherData()?.currentConditions?.winddir }}°
     </p>
   </div>

@@ -6,6 +6,10 @@ import { catchError, throwError } from 'rxjs';
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const alerts = inject(sweetAlertsService);
 
+  if (req.url.startsWith('/assets')) {
+    return next(req);
+  }
+
   let message = 'Error';
 
   const possibleErrors: { [key: number]: string } = {
