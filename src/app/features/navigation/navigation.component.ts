@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { tap } from 'rxjs';
-import { HeaderServiceService } from '../../shared/services/header-service.service';
-import { SearchWeatherService } from '../../shared/services/search-weather.service';
+import { HeaderServiceService } from '../../core/services/header-service.service';
+import { SearchWeatherService } from '../../core/services/search-weather.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 

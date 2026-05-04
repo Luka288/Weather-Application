@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
-import { conditions } from '../../consts';
-import { Condition } from '../../interfaces/base.types';
-import { WeatherResponse } from '../../interfaces/weatherInterface';
-import { RoundTempPipe } from '../../pipes/round-temp.pipe';
+import { conditions } from '../../../core/consts';
+import { Condition } from '../../../core/interfaces/base.types';
+import { WeatherResponse } from '../../../core/interfaces/weatherInterface';
+import { RoundTempPipe } from '../../../core/pipes/round-temp.pipe';
 import { ForecastContainerComponent } from '../forecast-container/forecast-container.component';
 
 @Component({

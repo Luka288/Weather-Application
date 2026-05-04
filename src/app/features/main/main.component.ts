@@ -1,24 +1,24 @@
 import { Component, inject, signal } from '@angular/core';
 import { tap } from 'rxjs';
-import { WeatherAPIService } from '../../shared/services/weather-api.service';
+import { WeatherAPIService } from '../../core/services/weather-api.service';
 import {
   hourlyRate,
   WeatherResponse,
-} from '../../shared/interfaces/weatherInterface';
+} from '../../core/interfaces/weatherInterface';
 import { CommonModule } from '@angular/common';
-import { SearchWeatherService } from '../../shared/services/search-weather.service';
-import { HeaderServiceService } from '../../shared/services/header-service.service';
+import { SearchWeatherService } from '../../core/services/search-weather.service';
+import { HeaderServiceService } from '../../core/services/header-service.service';
 import { NgxCubeLoaderComponent } from 'ngx-cube-loader';
-import { RoundTempPipe } from '../../shared/pipes/round-temp.pipe';
-import { LocationService } from '../../shared/services/location.service';
-import { conditions } from '../../shared/consts/dynamic.backrounds';
-import { DynamicBgService } from '../../shared/services/dynamic-bg.service';
+import { RoundTempPipe } from '../../core/pipes/round-temp.pipe';
+import { LocationService } from '../../core/services/location.service';
+import { conditions } from '../../core/consts/dynamic.backrounds';
+import { DynamicBgService } from '../../core/services/dynamic-bg.service';
 import { HourlyContainerComponent } from '../../shared/components/hourly-container/hourly-container.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ForecastCardComponent } from '../../shared/components/forecast-card/forecast-card.component';
-import { BooleanService } from '../../shared/services/boolean.service';
-import { TrackWidthDirective } from '../../shared/directives/track-width.directive';
-import { DateFormatPipe } from '../../shared/pipes/date-format.pipe';
+import { BooleanService } from '../../core/services/boolean.service';
+import { TrackWidthDirective } from '../../core/directives/track-width.directive';
+import { DateFormatPipe } from '../../core/pipes/date-format.pipe';
 import { WeatherDataComponent } from '../../shared/components/weather-data/weather-data.component';
 
 @Component({

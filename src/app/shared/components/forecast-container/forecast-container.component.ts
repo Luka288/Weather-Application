@@ -1,7 +1,7 @@
 import { Component, HostListener, inject, input } from '@angular/core';
-import { WeatherResponse } from '../../interfaces/weatherInterface';
+import { WeatherResponse } from '../../../core/interfaces/weatherInterface';
 import { ForecastCardComponent } from '../forecast-card/forecast-card.component';
-import { BooleanService } from '../../services/boolean.service';
+import { BooleanService } from '../../../core/services/boolean.service';
 
 @Component({
   selector: 'app-forecast-container',

@@ -7,9 +7,9 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
-import { errorInterceptor } from './shared/interceptors/error.interceptor';
-import { API, currLocation } from './shared/consts/consts';
-import { APIrequestInterceptor } from './shared/interceptors/api.request.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
+import { API, currLocation } from './core/consts/consts';
+import { APIrequestInterceptor } from './core/interceptors/api.request.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

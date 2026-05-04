@@ -6,13 +6,13 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { DateFormatPipe } from '../../pipes/date-format.pipe';
-import { RoundTempPipe } from '../../pipes/round-temp.pipe';
-import { FormatTimePipe } from '../../pipes/format-time.pipe';
+import { DateFormatPipe } from '../../../core/pipes/date-format.pipe';
+import { RoundTempPipe } from '../../../core/pipes/round-temp.pipe';
+import { FormatTimePipe } from '../../../core/pipes/format-time.pipe';
 import { CommonModule } from '@angular/common';
-import { hourlyRate } from '../../interfaces/weatherInterface';
-import { BooleanService } from '../../services/boolean.service';
-import { ScrollToViewDirective } from '../../directives/scroll-to-view.directive';
+import { hourlyRate } from '../../../core/interfaces/weatherInterface';
+import { BooleanService } from '../../../core/services/boolean.service';
+import { ScrollToViewDirective } from '../../../core/directives/scroll-to-view.directive';
 
 @Component({
   selector: 'app-hourly-container',
