@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { signalUpdateFn } from '@angular/core/primitives/signals';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,8 @@ export class StateService {
   isOpen = signal(false);
 
   loadingScreen = signal<boolean>(false);
+  headerVisible = signal<boolean>(false);
+  searchValue = signal<string | undefined>(undefined);
 
   toggle() {
     this.isOpen.update((v) => !v);

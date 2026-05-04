@@ -1,5 +1,5 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { tap } from 'rxjs';
+import { Component, computed, effect, inject, signal } from '@angular/core';
+import { catchError, EMPTY, filter, switchMap, tap } from 'rxjs';
 import { WeatherAPIService } from '../../core/services/weather-api.service';
 import {
   hourlyRate,
@@ -20,6 +20,8 @@ import { StateService } from '../../core/services/state.service';
 import { TrackWidthDirective } from '../../core/directives/track-width.directive';
 import { DateFormatPipe } from '../../core/pipes/date-format.pipe';
 import { WeatherDataComponent } from '../../shared/components/weather-data/weather-data.component';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { currLocationInter } from '../../core/interfaces/currInterface';
 
 @Component({
   selector: 'app-main',
@@ -37,14 +39,14 @@ import { WeatherDataComponent } from '../../shared/components/weather-data/weath
 export default class MainComponent {
   private readonly weatherAPI = inject(WeatherAPIService);
   private readonly searchWeather = inject(SearchWeatherService);
-  private readonly headerBoolean = inject(HeaderServiceService);
   private readonly currService = inject(LocationService);
   private readonly dynamicBg = inject(DynamicBgService);
 
+  private readonly headerBoolean = inject(HeaderServiceService);
   readonly stateService = inject(StateService);
 
-  displayWeather = signal<WeatherResponse | null>(null);
-  hourly = signal<hourlyRate[]>([]);
+  // displayWeather = signal<WeatherResponse | null>(null);
+  // hourly = signal<hourlyRate[]>([]);
 
   searchLocation = computed(() => this.weatherAPI.searchLocation());
 
@@ -57,10 +59,26 @@ export default class MainComponent {
 
   currDate = Date.now();
 
+  readonly location = toSignal(this.currService.getCurr());
+
+  readonly weatherData = toSignal(
+    toObservable(this.stateService.searchValue).pipe(
+      filter((city): city is string => !!city),
+      switchMap((city) => this.weatherAPI.getWeather(city)),
+      catchError((e) => {
+        console.error(e);
+        return EMPTY;
+      }),
+    ),
+    { initialValue: null },
+  );
+
   ngOnInit(): void {
-    this.initWeather();
-    this.getSearch();
-    this.updatingBooleans();
+    this.location();
+
+    // this.getSearch();
+    // this.initWeather();
+    // this.updatingBooleans();
   }
 
   initWeather() {
@@ -103,39 +121,37 @@ export default class MainComponent {
       // this.searchLocation.set(false);
       // this.searchBar.set(true);
       // this.loadingScreen.set(false);
-      this.headerBoolean.isHeaderAvailable(false);
+      // this.headerBoolean.isHeaderAvailable(false);
       return;
     }
 
     this.weatherAPI.getWeather(location).subscribe({
       next: (res) => {
-        this.hourly.set(res.days[0].hours);
-
-        // DATA IS PRESENT
-        this.displayWeather.set(res);
-
-        this.headerBoolean.isHeaderAvailable(true);
+        // this.hourly.set(res.days[0].hours);
+        // this.displayWeather.set(res);
+        // this.headerBoolean.isHeaderAvailable(true);
       },
     });
   }
 
   getSearch() {
-    this.searchWeather.searchValue$.subscribe((value) => {
-      if (value) {
-        this.loadWeather(value);
-      }
-    });
+    // this.searchWeather.searchValue$.subscribe((value) => {
+    //   if (value) {
+    //     this.activeLocation.set(value);
+    //   }
+    // });
   }
 
   setBg() {
     return this.dynamicBg.getVideoPath(
-      this.displayWeather()?.currentConditions.icon,
+      this.weatherData()?.currentConditions.icon,
     );
   }
 
   submitUserSearch(event: Event) {
     event.preventDefault();
     const value = this.locationSearch.value;
-    this.loadWeather(value);
+
+    this.stateService.searchValue.set(value);
   }
 }

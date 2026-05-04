@@ -30,7 +30,8 @@ import { ScrollToViewDirective } from '../../../core/directives/scroll-to-view.d
 export class HourlyContainerComponent {
   private readonly stateService = inject(StateService);
 
-  @Input({ alias: 'hourlyForecasts' }) foreCast!: hourlyRate[];
+  @Input({ alias: 'hourlyForecasts' }) foreCast: hourlyRate[] | undefined =
+    undefined;
 
   constructor() {}
 

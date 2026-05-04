@@ -4,11 +4,14 @@ import { API, weatherKey } from '../consts/consts';
 import { WeatherResponse } from '../interfaces/weatherInterface';
 import { catchError, EMPTY, Observable, Subject, tap, throwError } from 'rxjs';
 import { API_BASE } from '../consts/http.context';
+import { state } from '@angular/animations';
+import { StateService } from './state.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherAPIService {
+  private readonly stateService = inject(StateService);
   private readonly http = inject(HttpClient);
   protected readonly key = weatherKey;
 
@@ -35,6 +38,7 @@ export class WeatherAPIService {
         tap((res) => {
           this.searchBar.set(false);
           this.searchLocation.set(true);
+          this.stateService.headerVisible.set(true);
         }),
       );
   }

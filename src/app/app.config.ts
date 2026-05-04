@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
 
     {
       provide: currLocation,
-      useValue: `https://ipinfo.io/json?token=9b0asdasdsd5d3a816ac6`,
+      useValue: `https://ipinfo.io/json?token=9b0d5asdasdad3a816ac6`,
     },
     provideHttpClient(
       withInterceptors([errorInterceptor, APIrequestInterceptor]),

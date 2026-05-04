@@ -33,12 +33,14 @@
   @if (searchLocation()) {
     <div class="wrapper">
       <div class="side-container">
-        <app-hourly-container [hourlyForecasts]="hourly()" />
+        <app-hourly-container
+          [hourlyForecasts]="weatherData()?.days?.[0]?.hours"
+        />
       </div>
 
       <div class="middle-container">
-        @if (displayWeather()) {
-          <app-weather-data [weatherData]="displayWeather()" />
+        @if (weatherData()) {
+          <app-weather-data [weatherData]="weatherData()!" />
         }
       </div>
     </div>
