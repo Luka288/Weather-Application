@@ -1,152 +1,70 @@
-import { Component, inject, signal } from '@angular/core';
-import { tap } from 'rxjs';
-import { WeatherAPIService } from '../../shared/services/weather-api.service';
-import {
-  hourlyRate,
-  WeatherResponse,
-} from '../../shared/interfaces/weatherInterface';
+import { Component, computed, inject } from '@angular/core';
+import { catchError, EMPTY, filter, merge, switchMap } from 'rxjs';
+import { WeatherAPIService } from '../../core/services/weather-api.service';
 import { CommonModule } from '@angular/common';
-import { SearchWeatherService } from '../../shared/services/search-weather.service';
-import { HeaderServiceService } from '../../shared/services/header-service.service';
-import { NgxCubeLoaderComponent } from 'ngx-cube-loader';
-import { RoundTempPipe } from '../../shared/pipes/round-temp.pipe';
-import { LocationService } from '../../shared/services/location.service';
-import { conditions } from '../../shared/consts/dynamic.backrounds';
-import { DynamicBgService } from '../../shared/services/dynamic-bg.service';
+import { LocationService } from '../../core/services/location.service';
+import { DynamicBgService } from '../../core/services/dynamic-bg.service';
 import { HourlyContainerComponent } from '../../shared/components/hourly-container/hourly-container.component';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ForecastCardComponent } from '../../shared/components/forecast-card/forecast-card.component';
-import { BooleanService } from '../../shared/services/boolean.service';
-import { TrackWidthDirective } from '../../shared/directives/track-width.directive';
-import { DateFormatPipe } from '../../shared/pipes/date-format.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StateService } from '../../core/services/state.service';
+import { WeatherDataComponent } from '../../shared/components/weather-data/weather-data.component';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { SearchComponent } from '../../shared/components/search/search.component';
+import { currLocationInter } from '../../core/interfaces/currInterface';
 
 @Component({
   selector: 'app-main',
   standalone: true,
   imports: [
     CommonModule,
-    NgxCubeLoaderComponent,
-    RoundTempPipe,
     HourlyContainerComponent,
     ReactiveFormsModule,
-    ForecastCardComponent,
+    WeatherDataComponent,
+    SearchComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })
 export default class MainComponent {
   private readonly weatherAPI = inject(WeatherAPIService);
-  private readonly searchWeather = inject(SearchWeatherService);
-  private readonly headerBoolean = inject(HeaderServiceService);
-  private readonly currService = inject(LocationService);
+  private readonly locationService = inject(LocationService);
   private readonly dynamicBg = inject(DynamicBgService);
-  private readonly booleanService = inject(BooleanService);
 
-  displayWeather = signal<WeatherResponse | null>(null);
-  hourly = signal<hourlyRate[]>([]);
+  readonly stateService = inject(StateService);
 
-  searchLocation = signal<boolean>(false);
-  searchBar = signal<boolean>(false);
-  userLocationSearch = signal<boolean>(false);
-  loadingScreen = signal<boolean>(false);
+  // To handle edge case when there is no user search value stored
+  // Into localStorage searchBar computed method will toggle container
+  // Which allows user to manually search its location
+  searchBar = computed(() => this.weatherAPI.searchBar());
 
-  locationSearch = new FormControl('', { nonNullable: true });
+  searchLocation = computed(() => this.weatherAPI.searchLocation());
+
+  currentBackground = computed(() => {
+    const icon = this.weatherData()?.currentConditions.icon;
+    return this.dynamicBg.getVideoPath(icon);
+  });
 
   currDate = Date.now();
 
-  ngOnInit(): void {
-    this.initWeather();
-    this.getSearch();
-    this.updatingBooleans();
-  }
+  readonly location = toSignal(this.locationService.getCurr());
 
-  initWeather() {
-    const memory = localStorage.getItem('searchMemory');
+  readonly weatherData = toSignal(
+    merge(
+      toObservable(this.location),
+      toObservable(this.stateService.searchValue),
+    ).pipe(
+      filter((val): val is string | currLocationInter => !!val),
 
-    if (memory) {
-      this.loadWeather(memory);
-    } else if (!memory) {
-      this.loadCurr();
-      this.loadingScreen.set(true);
-      this.searchBar.set(true);
-    }
-  }
+      switchMap((val) => {
+        const cityQuery = typeof val === 'string' ? val : val.city;
+        return this.weatherAPI.getWeather(cityQuery);
+      }),
 
-  updatingBooleans(): void {
-    this.weatherAPI.searchBar$
-      .pipe(
-        tap((res) => {
-          this.searchBar.set(res);
-        }),
-      )
-      .subscribe();
-
-    this.weatherAPI.searchLocation$
-      .pipe(
-        tap((res) => {
-          this.searchLocation.set(res);
-        }),
-      )
-      .subscribe();
-  }
-
-  loadCurr() {
-    this.currService.getCurr().subscribe({
-      next: (res) => {
-        this.loadWeather(res.city);
-        this.loadingScreen.set(false);
-      },
-      error: () => {
-        this.searchBar.set(true);
-        this.userLocationSearch.set(true);
-        this.loadingScreen.set(false);
-      },
-    });
-  }
-
-  loadWeather(location: string) {
-    if (!location) {
-      this.searchLocation.set(false);
-      this.searchBar.set(true);
-      this.loadingScreen.set(false);
-      this.headerBoolean.isHeaderAvailable(false);
-      return;
-    }
-    this.weatherAPI.getWeather(location).subscribe({
-      next: (res) => {
-        this.hourly.set(res.days[0].hours);
-        this.displayWeather.set(res);
-        this.headerBoolean.isHeaderAvailable(true);
-      },
-    });
-  }
-
-  getWeatherIcon(condition: string | undefined): string {
-    return conditions[condition || 'Unknown'] || '';
-  }
-
-  getSearch() {
-    this.searchWeather.searchValue$.subscribe((value) => {
-      if (value) {
-        this.loadWeather(value);
-        // localStorage.setItem('searchValue', value);
-      }
-    });
-  }
-
-  setBg() {
-    return this.dynamicBg.getVideoPath(
-      this.displayWeather()?.currentConditions.icon,
-    );
-  }
-
-  submitUserSearch(event: Event) {
-    event.preventDefault();
-    const value = this.locationSearch.value;
-    this.loadWeather(value);
-  }
-
-  toggleContainer() {
-    this.booleanService.toggle();
-  }
+      catchError((e) => {
+        console.error(e);
+        return EMPTY;
+      }),
+    ),
+    { initialValue: null },
+  );
 }

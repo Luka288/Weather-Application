@@ -1,19 +1,22 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { Inject, inject, Injectable } from '@angular/core';
+import { Inject, inject, Injectable, signal } from '@angular/core';
 import { API, weatherKey } from '../consts/consts';
 import { WeatherResponse } from '../interfaces/weatherInterface';
 import { catchError, EMPTY, Observable, Subject, tap, throwError } from 'rxjs';
 import { API_BASE } from '../consts/http.context';
+import { state } from '@angular/animations';
+import { StateService } from './state.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherAPIService {
+  private readonly stateService = inject(StateService);
   private readonly http = inject(HttpClient);
   protected readonly key = weatherKey;
 
-  searchBar$ = new Subject<boolean>();
-  searchLocation$ = new Subject<boolean>();
+  searchBar = signal<boolean>(false);
+  searchLocation = signal<boolean>(false);
 
   constructor(@Inject(API) private BASE_API: string) {}
 
@@ -32,17 +35,16 @@ export class WeatherAPIService {
         },
       })
       .pipe(
-        tap(() => {
-          this.searchBar$.next(false);
-          this.searchLocation$.next(true);
+        tap((res) => {
+          this.searchBar.set(false);
+          this.searchLocation.set(true);
+          this.stateService.headerVisible.set(true);
         }),
       );
   }
 
   coordinatesWeather(latitude: number, longitude: number) {
     const ctx = new HttpContext().set(API_BASE, 'ipinfo');
-
-    console.log(ctx);
 
     return this.http.get<WeatherResponse>(
       `${latitude},${longitude}?unitGroup=metric&key=${this.key}&contentType=json`,

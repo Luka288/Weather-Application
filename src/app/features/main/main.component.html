@@ -3,105 +3,24 @@
     autoplay
     loop
     [muted]="'muted'"
-    [src]="setBg()"
+    [src]="currentBackground()"
     class="bgVideo"
     playsinline
   ></video>
+
   @if (searchBar()) {
-    <div class="searchBar">
-      @if (loadingScreen()) {
-        <ngx-cube-loader class="customLoader" colorSet="cyan"></ngx-cube-loader>
-      }
-
-      @if (userLocationSearch()) {
-        <div class="inputs">
-          <form (submit)="submitUserSearch($event)">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              [formControl]="locationSearch"
-            />
-            <button class="btn btn-outline-primary" type="submit">
-              Search
-            </button>
-          </form>
-          @if (userLocationSearch()) {
-            <p>could not find geo location please enter your location</p>
-          }
-        </div>
-      }
-    </div>
+    <app-search (searchValue)="stateService.searchValue.set($event)" />
   }
-  @if (searchLocation()) {
-    <div class="wrapper">
-      <app-hourly-container [hourlyForecasts]="hourly()" />
 
-      @if (displayWeather()) {
-        <div class="secondBox">
-          <div class="upperContainer">
-            <div class="mainInfo">
-              <h1 class="city">
-                <span class="cityAdress">
-                  {{ displayWeather()?.address }}
-                </span>
-                {{ displayWeather()?.resolvedAddress }}
-              </h1>
-              <div class="underHeader">
-                @if (
-                  displayWeather()?.currentConditions?.conditions &&
-                  displayWeather()?.currentConditions?.icon
-                ) {
-                  <img
-                    [src]="
-                      getWeatherIcon(displayWeather()?.currentConditions?.icon)
-                    "
-                    alt="Weather-icon"
-                  />
-                }
-                <p class="Temp">
-                  {{ (displayWeather()?.currentConditions)!.temp | roundTemp }}
-                  °C
-                </p>
-              </div>
-              <p class="condition">
-                {{ displayWeather()?.currentConditions?.conditions }}
-              </p>
-            </div>
-          </div>
-          <div class="windSpeedEtc">
-            <p>
-              Wind speed:
-              {{ displayWeather()?.currentConditions?.windspeed }} M/S
-            </p>
-            <p>
-              Wind Direction:
-              {{ displayWeather()?.currentConditions?.winddir }}°
-            </p>
-          </div>
-          @if (displayWeather() && searchLocation()) {
-            <div class="foreCasts">
-              <button class="hourlyCast" (click)="toggleContainer()">
-                <i class="fas fa-clock"></i> Hourly Forecast
-              </button>
-              <div class="container">
-                <div class="title">
-                  <p class="titleText">15 Day Forecast</p>
-                </div>
-                <div class="cards">
-                  @for (item of displayWeather()?.days; track $index) {
-                    <app-forecast-card
-                      [forecastCard]="item"
-                      [location]="displayWeather()!"
-                    />
-                  }
-                </div>
-              </div>
-            </div>
-          }
-        </div>
-      }
+  @if (weatherData(); as Data) {
+    <div class="wrapper">
+      <div class="side-container">
+        <app-hourly-container [hourlyForecasts]="Data?.days?.[0]?.hours" />
+      </div>
+
+      <div class="middle-container">
+        <app-weather-data [weatherData]="Data" />
+      </div>
     </div>
   }
 </main>

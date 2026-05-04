@@ -1,9 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { tap } from 'rxjs';
-import { HeaderServiceService } from '../../shared/services/header-service.service';
-import { SearchWeatherService } from '../../shared/services/search-weather.service';
+import { SearchWeatherService } from '../../core/services/search-weather.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { StateService } from '../../core/services/state.service';
 
 @Component({
   selector: 'app-navigation',
@@ -14,22 +14,17 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class NavigationComponent {
   private readonly searchWeather = inject(SearchWeatherService);
-  private readonly headerService = inject(HeaderServiceService);
+  private readonly stateService = inject(StateService);
 
-  // variables
   displayClock = signal<string>('');
-
-  // Booleans
-  isHeaderVisible = signal<boolean>(false);
   clockLoading = signal<boolean>(false);
+
+  isHeaderVisible = computed(() => this.stateService.headerVisible());
 
   searchControl = new FormControl('', { nonNullable: true });
 
   ngOnInit(): void {
     this.refreshClock();
-    this.headerService.headerVisible$.subscribe((res) =>
-      this.isHeaderVisible.set(res),
-    );
   }
 
   refreshClock() {
@@ -48,7 +43,9 @@ export class NavigationComponent {
     event.preventDefault();
 
     const value = this.searchControl.value;
-    this.searchWeather.setSearchValue(value);
+    // this.searchWeather.setSearchValue(value);
+
+    this.stateService.searchValue.set(value);
     this.searchControl.reset();
   }
 }

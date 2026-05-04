@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { daysInterf, WeatherResponse } from '../../interfaces/weatherInterface';
-import { conditions } from '../../consts/dynamic.backrounds';
+import {
+  daysInterf,
+  WeatherResponse,
+} from '../../../core/interfaces/weatherInterface';
+import { conditions } from '../../../core/consts/dynamic.backrounds';
 
 @Component({
   selector: 'app-forecast-card',

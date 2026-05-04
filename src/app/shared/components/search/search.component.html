@@ -1,0 +1,19 @@
+<div class="searchBar">
+  @if (stateService.loadingScreen()) {
+    <ngx-cube-loader class="customLoader" colorSet="cyan"></ngx-cube-loader>
+  }
+
+  <div class="inputs">
+    <form (submit)="submitUserSearch($event)">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        [formControl]="locationSearch"
+      />
+      <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+    <p>could not find geo location please enter your location</p>
+  </div>
+</div>
