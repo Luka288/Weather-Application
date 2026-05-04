@@ -11,7 +11,7 @@ import { RoundTempPipe } from '../../../core/pipes/round-temp.pipe';
 import { FormatTimePipe } from '../../../core/pipes/format-time.pipe';
 import { CommonModule } from '@angular/common';
 import { hourlyRate } from '../../../core/interfaces/weatherInterface';
-import { BooleanService } from '../../../core/services/boolean.service';
+import { StateService } from '../../../core/services/state.service';
 import { ScrollToViewDirective } from '../../../core/directives/scroll-to-view.directive';
 
 @Component({
@@ -28,14 +28,14 @@ import { ScrollToViewDirective } from '../../../core/directives/scroll-to-view.d
   styleUrl: './hourly-container.component.scss',
 })
 export class HourlyContainerComponent {
-  private readonly bool = inject(BooleanService);
+  private readonly stateService = inject(StateService);
 
   @Input({ alias: 'hourlyForecasts' }) foreCast!: hourlyRate[];
 
   constructor() {}
 
   get isOpen() {
-    return this.bool.isOpen();
+    return this.stateService.isOpen();
   }
 
   isCurrentHour(dateTime: number) {

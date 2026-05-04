@@ -1,7 +1,7 @@
 import { Component, HostListener, inject, input } from '@angular/core';
 import { WeatherResponse } from '../../../core/interfaces/weatherInterface';
 import { ForecastCardComponent } from '../forecast-card/forecast-card.component';
-import { BooleanService } from '../../../core/services/boolean.service';
+import { StateService } from '../../../core/services/state.service';
 
 @Component({
   selector: 'app-forecast-container',
@@ -11,19 +11,19 @@ import { BooleanService } from '../../../core/services/boolean.service';
   styleUrl: './forecast-container.component.scss',
 })
 export class ForecastContainerComponent {
-  private readonly booleanService = inject(BooleanService);
+  private readonly stateService = inject(StateService);
 
   weatherData = input<WeatherResponse | null>(null);
-  isOpen = this.booleanService.isOpen;
+  isOpen = this.stateService.isOpen;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     if (window.innerWidth > 1024 && this.isOpen()) {
-      this.booleanService.isOpen.set(false);
+      this.stateService.isOpen.set(false);
     }
   }
 
   toggleContainer() {
-    this.booleanService.toggle();
+    this.stateService.toggle();
   }
 }

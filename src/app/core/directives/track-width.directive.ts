@@ -5,14 +5,14 @@ import {
   inject,
   Renderer2,
 } from '@angular/core';
-import { BooleanService } from '../services/boolean.service';
+import { StateService } from '../services/state.service';
 
 @Directive({
   selector: '[appTrackWidth]',
   standalone: true,
 })
 export class TrackWidthDirective {
-  private readonly booleanService = inject(BooleanService);
+  private readonly stateService = inject(StateService);
 
   constructor() {
     this.checkWidth();
