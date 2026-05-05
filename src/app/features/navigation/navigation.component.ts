@@ -7,12 +7,17 @@ import { StateService } from '../../core/services/state.service';
 import { Lang, LanguageService } from '../../core/services/language.service';
 import { Languages } from '../../core/consts/index';
 import { LanguageOption } from '../../core/interfaces/language.type';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoDirective, TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslocoModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslocoDirective,
+    TranslocoPipe,
+  ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
 })
