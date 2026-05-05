@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { hourlyRate } from '../../../core/interfaces/weatherInterface';
 import { StateService } from '../../../core/services/state.service';
 import { ScrollToViewDirective } from '../../../core/directives/scroll-to-view.directive';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-hourly-container',
@@ -23,6 +24,7 @@ import { ScrollToViewDirective } from '../../../core/directives/scroll-to-view.d
     FormatTimePipe,
     CommonModule,
     ScrollToViewDirective,
+    TranslocoModule,
   ],
   templateUrl: './hourly-container.component.html',
   styleUrl: './hourly-container.component.scss',

@@ -1,10 +1,10 @@
 <div class="foreCasts">
   <button class="hourlyCast" (click)="toggleContainer()">
-    <i class="fas fa-clock"></i> Hourly Forecast
+    <i class="fas fa-clock"></i> {{ "hourly_forecast" | transloco }}
   </button>
   <div class="container">
     <div class="title">
-      <p class="titleText">15 Day Forecast</p>
+      <p class="titleText">{{ "15_day_forecast" | transloco }}</p>
     </div>
     <div class="cards">
       @for (item of weatherData()?.days; track $index) {

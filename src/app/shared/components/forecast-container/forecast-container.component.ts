@@ -2,11 +2,12 @@ import { Component, HostListener, inject, input } from '@angular/core';
 import { WeatherResponse } from '../../../core/interfaces/weatherInterface';
 import { ForecastCardComponent } from '../forecast-card/forecast-card.component';
 import { StateService } from '../../../core/services/state.service';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-forecast-container',
   standalone: true,
-  imports: [ForecastCardComponent],
+  imports: [ForecastCardComponent, TranslocoModule],
   templateUrl: './forecast-container.component.html',
   styleUrl: './forecast-container.component.scss',
 })

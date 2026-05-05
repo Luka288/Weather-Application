@@ -4,7 +4,7 @@
       <form role="search" (submit)="search($event)">
         <input
           type="text"
-          placeholder="Search for location"
+          [placeholder]="'placeholders.search_loc' | transloco"
           aria-label="Search"
           [formControl]="searchControl"
         />
@@ -13,7 +13,7 @@
       </form>
       <div class="liveClock">
         @if (clockLoading()) {
-          <p>Loading Local Clock...</p>
+          <p>{{ "base_texts.loading_clock" | transloco }}</p>
         }
         <p>
           {{ displayClock() }}

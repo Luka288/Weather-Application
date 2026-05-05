@@ -2,11 +2,17 @@ import { Component, inject, output } from '@angular/core';
 import { StateService } from '../../../core/services/state.service';
 import { NgxCubeLoaderComponent } from 'ngx-cube-loader';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [NgxCubeLoaderComponent, ReactiveFormsModule, FormsModule],
+  imports: [
+    NgxCubeLoaderComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    TranslocoModule,
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
