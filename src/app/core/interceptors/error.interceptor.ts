@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { sweetAlertsService } from '../services/sweet-alerts.service';
-import { catchError, throwError } from 'rxjs';
+import { catchError, throwError, EMPTY } from 'rxjs';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const alerts = inject(sweetAlertsService);
@@ -23,10 +23,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((err) => {
       message = possibleErrors[err.status] || 'Unknown error';
 
-      console.log(err);
+      console.error(err);
 
       alerts.toast(message, 'error', '');
-      return throwError(() => new Error('Error occurred'));
+      return EMPTY;
     }),
   );
 };
