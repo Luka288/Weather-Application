@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { catchError, EMPTY, filter, merge, switchMap } from 'rxjs';
 import { WeatherAPIService } from '../../core/services/weather-api.service';
-import { CommonModule } from '@angular/common';
+
 import { LocationService } from '../../core/services/location.service';
 import { DynamicBgService } from '../../core/services/dynamic-bg.service';
 import { HourlyContainerComponent } from '../../shared/components/hourly-container/hourly-container.component';
@@ -16,12 +16,11 @@ import { currLocationInter } from '../../core/interfaces/currInterface';
   selector: 'app-main',
   standalone: true,
   imports: [
-    CommonModule,
     HourlyContainerComponent,
     ReactiveFormsModule,
     WeatherDataComponent,
-    SearchComponent,
-  ],
+    SearchComponent
+],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })

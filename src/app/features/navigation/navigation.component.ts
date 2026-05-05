@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { tap } from 'rxjs';
 import { SearchWeatherService } from '../../core/services/search-weather.service';
-import { CommonModule } from '@angular/common';
+
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { StateService } from '../../core/services/state.service';
 import { Lang, LanguageService } from '../../core/services/language.service';
@@ -12,12 +12,7 @@ import { TranslocoDirective, TranslocoPipe } from '@jsverse/transloco';
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TranslocoDirective,
-    TranslocoPipe,
-  ],
+  imports: [ReactiveFormsModule, TranslocoPipe],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
 })
