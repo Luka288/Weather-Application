@@ -13,6 +13,8 @@ export class StateService {
   headerVisible = signal<boolean>(false);
   searchValue = signal<string | undefined>(undefined);
 
+  langDropdownOpen = signal<boolean>(false);
+
   toggle() {
     this.isOpen.update((v) => !v);
   }

@@ -4,11 +4,12 @@ import { Condition } from '../../../core/interfaces/base.types';
 import { WeatherResponse } from '../../../core/interfaces/weatherInterface';
 import { RoundTempPipe } from '../../../core/pipes/round-temp.pipe';
 import { ForecastContainerComponent } from '../forecast-container/forecast-container.component';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-weather-data',
   standalone: true,
-  imports: [RoundTempPipe, ForecastContainerComponent],
+  imports: [RoundTempPipe, ForecastContainerComponent, TranslocoModule],
   templateUrl: './weather-data.component.html',
   styleUrl: './weather-data.component.scss',
 })

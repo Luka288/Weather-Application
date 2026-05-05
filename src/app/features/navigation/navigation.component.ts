@@ -4,20 +4,27 @@ import { SearchWeatherService } from '../../core/services/search-weather.service
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { StateService } from '../../core/services/state.service';
+import { Lang, LanguageService } from '../../core/services/language.service';
+import { Languages } from '../../core/consts/index';
+import { LanguageOption } from '../../core/interfaces/language.type';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslocoModule],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
 })
 export class NavigationComponent {
-  private readonly searchWeather = inject(SearchWeatherService);
-  private readonly stateService = inject(StateService);
+  readonly languageService = inject(LanguageService);
+  readonly stateService = inject(StateService);
+
+  protected Lang = Lang;
+  readonly langs = Languages;
 
   displayClock = signal<string>('');
-  clockLoading = signal<boolean>(false);
+  clockLoading = signal<boolean>(true);
 
   isHeaderVisible = computed(() => this.stateService.headerVisible());
 
@@ -25,6 +32,13 @@ export class NavigationComponent {
 
   ngOnInit(): void {
     this.refreshClock();
+  }
+
+  setLang(lang: LanguageOption) {
+    this.languageService.switchLanguage(lang.code);
+    this.stateService.langDropdownOpen.set(
+      !this.stateService.langDropdownOpen(),
+    );
   }
 
   refreshClock() {
@@ -43,7 +57,6 @@ export class NavigationComponent {
     event.preventDefault();
 
     const value = this.searchControl.value;
-    // this.searchWeather.setSearchValue(value);
 
     this.stateService.searchValue.set(value);
     this.searchControl.reset();

@@ -4,7 +4,7 @@
       <form role="search" (submit)="search($event)">
         <input
           type="text"
-          placeholder="Search for location"
+          [placeholder]="'placeholders.search_loc' | transloco"
           aria-label="Search"
           [formControl]="searchControl"
         />
@@ -13,17 +13,61 @@
       </form>
       <div class="liveClock">
         @if (clockLoading()) {
-          <p>Loading Local Clock...</p>
+          <p>{{ "base_texts.loading_clock" | transloco }}</p>
         }
         <p>
           {{ displayClock() }}
         </p>
       </div>
       <div class="nav-left">
-        <i class="fa-brands fa-github"></i>
-        <a href="https://github.com/Luka288" target="_blank" class="correct">
-          Luka288
-        </a>
+        <div class="github">
+          <i class="fa-brands fa-github"></i>
+          <a href="https://github.com/Luka288" target="_blank" class="correct">
+            Luka288
+          </a>
+        </div>
+
+        <div class="lang-switch">
+          <button
+            class="lang-btn"
+            (click)="
+              stateService.langDropdownOpen.set(
+                !stateService.langDropdownOpen()
+              )
+            "
+          >
+            <span class="flag">{{
+              languageService.current() === Lang.EN ? "EN" : "KA"
+            }}</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none">
+              <path
+                d="M2 4L6 8L10 4"
+                stroke="rgba(255,255,255,0.7)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          @if (stateService.langDropdownOpen()) {
+            <div class="lang-dropdown">
+              @for (lang of langs; track $index) {
+                <div
+                  class="lang-option"
+                  [class.active]="languageService.current() === lang.code"
+                  (click)="setLang(lang)"
+                >
+                  <span class="flag">{{ lang.flag }}</span>
+                  <span>{{ lang.label }}</span>
+                  @if (languageService.current() === lang.code) {
+                    <span class="check">✓</span>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
       </div>
     </div>
   </nav>

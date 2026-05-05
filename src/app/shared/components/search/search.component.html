@@ -12,8 +12,10 @@
         aria-label="Search"
         [formControl]="locationSearch"
       />
-      <button class="btn btn-outline-primary" type="submit">Search</button>
+      <button class="btn btn-outline-primary" type="submit">
+        {{ "search" | transloco }}
+      </button>
     </form>
-    <p>could not find geo location please enter your location</p>
+    <p>{{ "base_texts.info_text" | transloco }}</p>
   </div>
 </div>
