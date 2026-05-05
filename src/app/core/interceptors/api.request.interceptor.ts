@@ -8,7 +8,7 @@ export const APIrequestInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  if (req.url.startsWith('/assets')) {
+  if (req.url.startsWith('/assets') || req.url.startsWith('assets/')) {
     return next(req);
   }
 

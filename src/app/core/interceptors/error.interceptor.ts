@@ -6,7 +6,7 @@ import { catchError, throwError, EMPTY } from 'rxjs';
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const alerts = inject(sweetAlertsService);
 
-  if (req.url.startsWith('/assets')) {
+  if (req.url.startsWith('/assets') || req.url.startsWith('assets/')) {
     return next(req);
   }
 
