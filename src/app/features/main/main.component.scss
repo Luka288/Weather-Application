@@ -1,5 +1,5 @@
-@import "../../shared/styles/mixins/mixins.scss";
-@import "../../shared/styles/variables/variables.scss";
+@use "../../shared/styles/mixins/mixins.scss" as *;
+@use "../../shared/styles/variables/variables.scss" as *;
 
 ::-webkit-scrollbar {
   width: 8px;

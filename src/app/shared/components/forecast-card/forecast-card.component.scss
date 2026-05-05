@@ -1,5 +1,5 @@
-@import "../../../shared/styles/mixins/mixins";
-@import "../../../shared/styles/variables/variables";
+@use "../../../shared/styles/mixins/mixins" as *;
+@use "../../../shared/styles/variables/variables" as *;
 
 .Card {
   width: 220px;
