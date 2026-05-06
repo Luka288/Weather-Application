@@ -19,12 +19,12 @@ import { currLocationInter } from '../../core/interfaces/currInterface';
     HourlyContainerComponent,
     ReactiveFormsModule,
     WeatherDataComponent,
-    SearchComponent
-],
+    SearchComponent,
+  ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })
-export default class MainComponent {
+export class MainComponent {
   private readonly weatherAPI = inject(WeatherAPIService);
   private readonly locationService = inject(LocationService);
   private readonly dynamicBg = inject(DynamicBgService);

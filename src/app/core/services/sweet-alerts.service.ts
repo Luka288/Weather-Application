@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import Swal, { SweetAlertIcon } from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import type { SweetAlertIcon } from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class sweetAlertsService {
     title: string,
     icon: SweetAlertIcon,
     color: string,
-    time: number = 1500
+    time: number = 1500,
   ): void {
     const Toast = Swal.mixin({
       toast: true,
